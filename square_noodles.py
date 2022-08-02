@@ -1,7 +1,9 @@
+import platform
 import numpy as np
 import bpy
 from collections import namedtuple
 
+OS = platform.system()
 bl_info = {
     "name": "Square Noodles",
     "description": "Forces selected node noodles to use exclusively right angle turns",
@@ -96,10 +98,15 @@ def get_socket_dict(node):
     VEC_Y_BOTTOM = 75
     VEC_HEIGHT = 82.5
 
-    if (node.bl_idname != 'NodeReroute') and (not node.hide):
+    if OS == 'Darwin':
         # node.dimensions is mysteriously off by a factor of 2
         node_width = node.dimensions.x / 2
         node_height = node.dimensions.y / 2
+    else:
+        node_width = node.dimensions.x
+        node_height = node.dimensions.y
+
+    if (node.bl_idname != 'NodeReroute') and (not node.hide):
 
         # Walk up the inputs and store their positions (have to account for "tall" inputs)
         x = node.location.x
@@ -143,9 +150,6 @@ def get_socket_dict(node):
 
     # For when the node is collapsed with sockets arranged in a semicircle at either end
     if (node.bl_idname != 'NodeReroute') and (node.hide):
-        # node.dimensions is mysteriously off by a factor of 2
-        node_width = node.dimensions.x / 2
-        node_height = node.dimensions.y / 2
 
         Y_CENTER_OFFSET = 10.0
 
