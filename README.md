@@ -7,6 +7,7 @@ A Blender addon that converts all your node noodles into neat little right-angle
 To install, simply click the big green "Code" button, then click Download ZIP. Unzip the result. In Blender, click **Edit > Preferences**, then inside the **Addons** panel, click **Install**. Navigate to the unzipped download folder and double click on `square_noodles.py`. Check the box next to the addon in the addons list to enable it.
 
 ## Usage
+*Note: Currently this addon creates some strange visual glitches if your node noodles are curvy instead of straight. I'm working to fix this, but for now, under `Edit > Preferences > Themes > Node Editor` set `Noodle Curving` to 0 to get the advertised result.*
 The addon has only one operator, Square Noodles, which works in any node editor space (compositor/geometry/shader/texture etc.). It only operates on nodes that you have selected. You can run Square Noodles by either searching for it in the `F3` search menu, or by using the default keyboard shortcut, `SHIFT+COMMA` (you actually press the `,` key, you don't type "COMMA").
 
 After using the operator, if you hit `F9` you can edit some of its parameters:
