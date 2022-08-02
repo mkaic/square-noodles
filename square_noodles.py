@@ -289,9 +289,11 @@ class NODE_OT_square_noodles(bpy.types.Operator):
                         non_reroute_targets, non_reroute_distances = [], []
                         reroute_targets, reroute_x_distances, reroute_y_distances = [], [], []
                         for path in target_sockets:
-                            target = socket_dict[path[0]]
-                            target = target[path[1]]
-                            target = target[path[2]]
+                            try:
+                                target = socket_dict[path[0]][path[1]][path[2]]
+                            except KeyError as e:
+                                print('First Loop', e)
+                                continue
                             target_node = target.socket.node
                             x_distance = (target.x - root_socket_info.x)
                             y_distance = (target.y - root_socket_info.y)
@@ -376,8 +378,11 @@ class NODE_OT_square_noodles(bpy.types.Operator):
                             target_direction = 'input'
                             target_node = link.to_node
                             target_socket = link.to_socket
-
-                        target_socket_info = socket_dict[target_node.name][target_direction][target_socket.identifier]
+                        try:
+                            target_socket_info = socket_dict[target_node.name][target_direction][target_socket.identifier]
+                        except KeyError as e:
+                            print('Second Loop', e)
+                            continue
 
                         # First, we check if these coordinates are already aligned (within a margin of error)
                         if check_aligned(root_socket_info, target_socket_info, self.tolerance):
