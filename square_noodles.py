@@ -1,7 +1,6 @@
-from collections import namedtuple
-
-import bpy
 import numpy as np
+import bpy
+from collections import namedtuple
 
 bl_info = {
     "name": "Square Noodles",
@@ -13,6 +12,7 @@ bl_info = {
     "support": "COMMUNITY",
     "category": "Node",
 }
+
 
 Socket = namedtuple('Socket', ['socket', 'direction', 'x', 'y'])
 Point = namedtuple('Point', ['x', 'y'])
@@ -471,21 +471,25 @@ def register():
 
     # handle the keymap
     wm = bpy.context.window_manager
-    km = wm.keyconfigs.addon.keymaps.new(name='Object Mode', space_type='EMPTY')
+    kc = wm.keyconfigs.addon
 
-    kmi = km.keymap_items.new(NODE_OT_square_noodles.bl_idname, ',', 'PRESS', ctrl=False, shift=True)
-    kmi.properties.total = 4
+    # apparently the "name" field below is an enum with 190 options and they're not documented. Yeesh.
+    if kc:
+        km = kc.keymaps.new(name='Node Editor', space_type='NODE_EDITOR')
+
+    kmi = km.keymap_items.new(NODE_OT_square_noodles.bl_idname, 'COMMA', 'PRESS', ctrl=False, shift=True)
 
     addon_keymaps.append((km, kmi))
 
 
 def unregister():
-    bpy.utils.unregister_class(NODE_OT_square_noodles)
 
     # handle the keymap
     for km, kmi in addon_keymaps:
         km.keymap_items.remove(kmi)
     addon_keymaps.clear()
+
+    bpy.utils.unregister_class(NODE_OT_square_noodles)
 
 
 if __name__ == '__main__':
