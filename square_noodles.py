@@ -3,11 +3,19 @@ from collections import namedtuple
 import bpy
 import numpy as np
 
+bl_info = {
+    "name": "Square Noodles",
+    "description": "Forces selected node noodles to use exclusively right angle turns",
+    "author": "Kai Christensen",
+    "version": (1, 0),
+    "blender": (3, 2, 1),
+    "doc_url": "https://github.com/mkaic/square-noodles",
+    "support": "COMMUNITY",
+    "category": "Node",
+}
+
 Socket = namedtuple('Socket', ['socket', 'direction', 'x', 'y'])
 Point = namedtuple('Point', ['x', 'y'])
-
-ALIGN_INPUT = True
-ALIGN_REROUTES = True
 
 bpy.types.Node.is_reroute = bpy.props.BoolProperty(name="Is Reroute Node", default=False)
 bpy.types.Node.x_lock = bpy.props.BoolProperty(name="X Lock", default=False)
@@ -454,14 +462,31 @@ class NODE_OT_square_noodles(bpy.types.Operator):
         return {'FINISHED'}
 
 
+# store keymaps here to access after registration
+addon_keymaps = []
+
+
 def register():
     bpy.utils.register_class(NODE_OT_square_noodles)
+
+    # handle the keymap
+    wm = bpy.context.window_manager
+    km = wm.keyconfigs.addon.keymaps.new(name='Object Mode', space_type='EMPTY')
+
+    kmi = km.keymap_items.new(NODE_OT_square_noodles.bl_idname, ',', 'PRESS', ctrl=False, shift=True)
+    kmi.properties.total = 4
+
+    addon_keymaps.append((km, kmi))
 
 
 def unregister():
     bpy.utils.unregister_class(NODE_OT_square_noodles)
 
+    # handle the keymap
+    for km, kmi in addon_keymaps:
+        km.keymap_items.remove(kmi)
+    addon_keymaps.clear()
+
 
 if __name__ == '__main__':
-
     register()
