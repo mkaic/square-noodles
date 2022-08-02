@@ -79,8 +79,6 @@ def assign_output_offsets(node, gap):
         offsets = np.linspace(start=start, stop=stop, num=n_out)
         for offset, output in zip(offsets, outputs):
             output.center_offset = offset
-            print(offset)
-        print([output.center_offset for output in outputs])
 
 
 def get_socket_dict(node):
