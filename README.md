@@ -19,3 +19,6 @@ After using the operator, if you hit `F9` you can edit some of its parameters:
 This addon is not magic and is meant to save time, not revolutionize your workflow. It works best when the node noodles are already decently organized. I hope you find it useful!
 
 I'm fully open to pull requests if anyone wants to submit them. I'm sure my code could be optimized considerably and there are still several missing features I plan to add.
+
+##License
+This code is made available under the [GNU GPL 3.0 License](https://www.gnu.org/licenses/gpl-3.0.txt). This is a very permissive copyleft license, which means you're free to use, modify, or redistribute this code however you like.
