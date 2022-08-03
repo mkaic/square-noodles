@@ -22,8 +22,8 @@ bl_info = {
     "name": "Square Noodles",
     "description": "Forces selected node noodles to use exclusively right angle turns",
     "author": "Kai Christensen",
-    "version": (1, 0),
-    "blender": (3, 2, 1),
+    "version": (1, 1),
+    "blender": (3, 2, 0),
     "doc_url": "https://github.com/mkaic/square-noodles",
     "support": "COMMUNITY",
     "category": "Node",
@@ -97,12 +97,14 @@ def assign_output_offsets(node, gap):
             output.center_offset = offset
 
 
-def get_socket_dict(node):
+def get_socket_dict(node, context):
     inputs = list(reversed(node.inputs))
     outputs = node.outputs
 
     # Empty dict for holding input and output socket coordinates
     socket_dict = {'input': {}, 'output': {}}
+
+    UI_SCALING = context.preferences.view.ui_scale
 
     Y_TOP = 35.0
 
@@ -119,6 +121,9 @@ def get_socket_dict(node):
     else:
         node_width = node.dimensions.x
         node_height = node.dimensions.y
+
+    node_width = node_width/UI_SCALING
+    node_height = node_height/UI_SCALING
 
     if (node.bl_idname != 'NodeReroute') and (not node.hide):
 
@@ -265,7 +270,7 @@ class NODE_OT_square_noodles(bpy.types.Operator):
         socket_dict = {}
         # Loops over all selected nodes
         for node in global_nodes:
-            socket_dict[node.name] = get_socket_dict(node)
+            socket_dict[node.name] = get_socket_dict(node, context)
             node.is_reroute = node.bl_idname == 'NodeReroute'
             node.x_lock = not node.is_reroute
             node.y_lock = not node.is_reroute
@@ -371,7 +376,7 @@ class NODE_OT_square_noodles(bpy.types.Operator):
             valid_nodes = [n for n in global_nodes if n.select
                            and not is_orphan(n)]
             for check_node in global_nodes:
-                socket_dict[check_node.name] = get_socket_dict(check_node)
+                socket_dict[check_node.name] = get_socket_dict(check_node, context)
                 check_node.is_reroute = check_node.bl_idname == 'NodeReroute'
 
             root_socket_dict = socket_dict[root_node.name]
