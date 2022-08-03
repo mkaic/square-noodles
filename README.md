@@ -4,7 +4,7 @@ A Blender addon that converts all your node noodles into neat little right-angle
 ![short_noodle](https://user-images.githubusercontent.com/80430764/182304566-c04dd279-cea2-4c3e-97b9-98c8709ac7c5.gif)
 
 ## Installation
-To install, simply click the big green "Code" button, then click Download ZIP. Unzip the result. In Blender, click **Edit > Preferences**, then inside the **Addons** panel, click **Install**. Navigate to the unzipped download folder and double click on `square_noodles.py`. Check the box next to the addon in the addons list to enable it.
+To install, simply click the big green "Code" button at the top of this page, then click Download ZIP. Unzip the result. In Blender, click **Edit > Preferences**, then inside the **Addons** panel, click **Install**. Navigate to the unzipped folder you just downloaded and double click on `square_noodles.py`. Check the box next to the addon in the addons list to enable it.
 
 ## Usage
 *Note: if you use a non-zero `Noodle Curving` value, right-angle corners that flow "down-left" or "left-down" will have a weird little artifact on them due to node noodles not curving smoothly out of the bottom or left sides of reroute nodes (I think). If you want to fix this, you'll need to set `Noodle Curving` to 0 under `Edit > Preferences > Themes > Node Editor`.*
