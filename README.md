@@ -20,5 +20,5 @@ This addon is not magic and is meant to save time, not revolutionize your workfl
 
 I'm fully open to pull requests if anyone wants to submit them. I'm sure my code could be optimized considerably and there are still several missing features I plan to add.
 
-##License
+## License
 This code is made available under the [GNU GPL 3.0 License](https://www.gnu.org/licenses/gpl-3.0.txt). This is a very permissive copyleft license, which means you're free to use, modify, or redistribute this code however you like.
