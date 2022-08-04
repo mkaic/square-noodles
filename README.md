@@ -1,5 +1,5 @@
 # Square Noodles
-A Blender addon that converts all your node noodles into neat little right-angled circuitboard-looking-shenanigans.
+A Blender addon that makes your noodles straight so you don't have to be.
 
 ![short_noodle](https://user-images.githubusercontent.com/80430764/182304566-c04dd279-cea2-4c3e-97b9-98c8709ac7c5.gif)
 
